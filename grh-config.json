@@ -1,0 +1,11 @@
+{
+    "branchToRevise": "solution",
+    "incrementCommits": [
+        {
+            "message": "Initial commit",
+            "tags": [
+                "distributed-system"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+---
+applications:
+- name: tracker-allocations
+  instances: 1
+  memory: 256M
+  host: allocations-pal-INITIALS
+  path: Applications/AllocationsServer/bin/Release/netcoreapp1.1/publish
+  env:
+    REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
+  services:
+  - tracker-allocations-database

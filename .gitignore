@@ -1,0 +1,12 @@
+CI/variables.yml
+bin/
+obj/
+.gradle
+build
+.idea
+*.iml
+*.ipr
+*.iws
+.DS_Store
+.deployment
+*.userprefs

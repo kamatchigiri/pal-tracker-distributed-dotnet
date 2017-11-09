@@ -1,0 +1,11 @@
+---
+applications:
+- name: tracker-registration
+  instances: 1
+  memory: 256M
+  host: registration-pal-INITIALS
+  path: Applications/RegistrationServer/bin/Release/netcoreapp1.1/publish
+  env:
+    REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
+  services:
+  - tracker-registration-database
