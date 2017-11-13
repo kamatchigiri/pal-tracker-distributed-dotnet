@@ -9,3 +9,4 @@ applications:
     REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
   services:
   - tracker-allocations-database
+  - tracker-service-registry

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Pivotal.Discovery.Client;
+using Steeltoe.Extensions.Configuration;
 
 namespace BacklogServer
 {
@@ -18,6 +20,7 @@ namespace BacklogServer
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddCloudFoundry()
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -27,18 +30,24 @@ namespace BacklogServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient(Configuration);
+
             // Add framework services.
             services.AddMvc();
-            
+
             services.AddSingleton<IDataSourceConfig, DataSourceConfig>();
             services.AddSingleton<IDatabaseTemplate, DatabaseTemplate>();
             services.AddSingleton<IStoryDataGateway, StoryDataGateway>();
-            
-            var httpClient = new HttpClient
+
+            var serviceProvider = services.BuildServiceProvider();
+            var discoveryClient = serviceProvider.GetService<IDiscoveryClient>();
+            var handler = new DiscoveryHttpClientHandler(discoveryClient);
+
+            var httpClient = new HttpClient(handler, false)
             {
                 BaseAddress = new Uri(Configuration.GetValue<string>("REGISTRATION_SERVER_ENDPOINT"))
             };
-
+            
             services.AddSingleton<IProjectClient>(new ProjectClient(httpClient));
         }
 
@@ -49,6 +58,7 @@ namespace BacklogServer
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseDiscoveryClient();
         }
     }
 }

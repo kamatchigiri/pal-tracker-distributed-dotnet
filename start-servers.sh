@@ -14,7 +14,7 @@ function startServer() {
     cd $appDir
     
     export Logging__LogLevel__Default=Debug
-    export REGISTRATION_SERVER_ENDPOINT=http://localhost:8883/
+    export REGISTRATION_SERVER_ENDPOINT=http://registration-service/
     export VCAP_SERVICES="{ \"p-mysql\": [ { \"credentials\": { \"hostname\": \"localhost\", \"port\": 3306, \"name\": \"${dbName}\", \"username\": \"tracker\", \"password\": \"password\" } } ] }"
     
     dotnet run --server.urls "http://*:${port}"
