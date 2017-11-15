@@ -3,10 +3,10 @@ applications:
 - name: tracker-backlog
   instances: 1
   memory: 256M
-  host: backlog-pal-INITIALS
+  host: backlog-pal-sartan
   path: Applications/BacklogServer/bin/Release/netcoreapp1.1/publish
   env:
-    REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
+    REGISTRATION_SERVER_ENDPOINT: http://registration-service/
   services:
   - tracker-backlog-database
   - tracker-service-registry

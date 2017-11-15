@@ -3,10 +3,10 @@ applications:
 - name: tracker-registration
   instances: 1
   memory: 256M
-  host: registration-pal-INITIALS
+  host: registration-pal-sartan
   path: Applications/RegistrationServer/bin/Release/netcoreapp1.1/publish
   env:
-    REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
+    REGISTRATION_SERVER_ENDPOINT: http://registration-service/
   services:
   - tracker-registration-database
   - tracker-service-registry

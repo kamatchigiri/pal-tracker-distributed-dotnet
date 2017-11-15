@@ -3,10 +3,10 @@ applications:
 - name: tracker-timesheets
   instances: 1
   memory: 256M
-  host: timesheets-pal-INITIALS
+  host: timesheets-pal-sartan
   path: Applications/TimesheetsServer/bin/Release/netcoreapp1.1/publish
   env:
-    REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN/
+    REGISTRATION_SERVER_ENDPOINT: http://registration-service/
   services:
   - tracker-timesheets-database
   - tracker-service-registry
